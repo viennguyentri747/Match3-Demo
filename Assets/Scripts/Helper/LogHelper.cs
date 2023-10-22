@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Match3Bonus
 {
-    public static class Logger
+    public static class LogHelper
     {
         public static void LogErrorLoop<T>(IEnumerable<T> collection, Func<T, string> getLogStr)
         {
