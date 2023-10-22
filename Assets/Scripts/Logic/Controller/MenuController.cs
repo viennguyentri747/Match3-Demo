@@ -8,38 +8,23 @@ namespace Match3Bonus
     public class MenuController : MonoBehaviour
     {
         [SerializeField] private List<SOPrize> _prizes;
-        [SerializeField] private MenuBtnComp _btnTemplate;
-        [SerializeField] private List<MenuBtnComp> _cacheBtnComps;
         [SerializeField] private string _gameScene;
-
-        private Queue<PrizeElement> _shuffledPrizes = new Queue<PrizeElement>();
+        [SerializeField] private MenuViewController _viewController;
+         
+        private Queue<PrizeElement> _shuffledPrizes = new();
         private readonly IPrizesShuffler<SelectPrizePack> _prizesShuffler = new PrizesShufflerMatchSelected();
-        private SceneLoader _sceneLoader = new();
+        private readonly SceneLoader _sceneLoader = new();
 
         private void Start()
         {
-            ShowButtons();
+            _viewController.ShowButtons(_prizes, OnClickButtonPrize);
         }
-
-        private void ShowButtons()
-        {
-            _btnTemplate.ShowCachedViews(_prizes, _cacheBtnComps,
-                (btnComp, prize) => { btnComp.SetData(prize.Name, () => { OnClickButtonPrize(prize); }); });
-        }
-
+        
         private void OnClickButtonPrize(SOPrize selectedPrize)
         {
-            LockButtons();
+            _viewController.LockButtons();
             CreateShuffledPrizes(selectedPrize);
             _sceneLoader.LoadScene(_gameScene, LoadSceneMode.Single, OnGameSceneLoaded);
-        }
-
-        private void LockButtons()
-        {
-            foreach (MenuBtnComp btnComp in _cacheBtnComps)
-            {
-                btnComp.SetBtnEnable(false);
-            }
         }
 
         private void CreateShuffledPrizes(SOPrize selectedPrize)
