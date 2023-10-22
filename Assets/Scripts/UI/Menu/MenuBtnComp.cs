@@ -10,11 +10,10 @@ namespace Match3Bonus
         [SerializeField] private Button _button;
         private Action _onClick;
 
-        public void SetData(string buttonText, Action onClick)
+        public void Set(string buttonText, Action onClick)
         {
             _onClick = onClick;
             _text.text = buttonText;
-            SetBtnEnable(true);
         }
 
         public void SetBtnEnable(bool isEnable)
