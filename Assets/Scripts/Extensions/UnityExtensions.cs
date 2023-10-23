@@ -1,14 +1,21 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Match3Bonus
 {
     public static class UnityExtensions
     {
-        public static void SetActive(this MonoBehaviour mono, bool isActive)
+        private static void SetActive(this MonoBehaviour mono, bool isActive)
         {
             mono.gameObject.SetActive(isActive);
+        }
+
+        public static void ShowCachedViews<TView, TData>(this TView viewTemplate, IEnumerable<TData> viewDatas,
+            IList<TView> cacheViews, Action<TView, TData> setupView) where TView : MonoBehaviour
+        {
+            viewTemplate.ShowCachedViews(viewDatas as List<TData> ?? viewDatas.ToList(), cacheViews, setupView);
         }
 
         public static void ShowCachedViews<TView, TData>(this TView viewTemplate, IList<TData> viewDatas,
