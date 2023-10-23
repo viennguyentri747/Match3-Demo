@@ -9,7 +9,7 @@ namespace Match3Bonus
     {
         [SerializeField] private List<SOPrize> _prizes;
         [SerializeField] private string _gameScene;
-        [SerializeField] private MenuViewController _viewController;
+        [SerializeField] private MenuView _view;
          
         private Queue<PrizeElement> _shuffledPrizes = new();
         private readonly IPrizesShuffler<SelectPrizePack> _prizesShuffler = new PrizesShufflerMatchSelected();
@@ -17,12 +17,12 @@ namespace Match3Bonus
 
         private void Start()
         {
-            _viewController.ShowButtons(_prizes, OnClickButtonPrize);
+            _view.ShowButtons(_prizes, OnClickButtonPrize);
         }
         
         private void OnClickButtonPrize(SOPrize selectedPrize)
         {
-            _viewController.LockButtons();
+            _view.LockButtons();
             CreateShuffledPrizes(selectedPrize);
             _sceneLoader.LoadScene(_gameScene, LoadSceneMode.Single, OnGameSceneLoaded);
         }

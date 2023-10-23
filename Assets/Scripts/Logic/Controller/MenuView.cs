@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Match3Bonus
 {
-    public class MenuViewController : MonoBehaviour
+    public class MenuView : MonoBehaviour
     {
         [SerializeField] private MenuBtnComp _btnTemplate;
         [SerializeField] private List<MenuBtnComp> _cacheBtnComps;
