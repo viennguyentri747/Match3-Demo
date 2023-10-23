@@ -4,13 +4,13 @@ using UnityEngine.UI;
 
 namespace Match3Bonus
 {
-    public class MenuBtnComp : MonoBehaviour
+    public class MenuBtnView : MonoBehaviour
     {
         [SerializeField] private Text _text;
         [SerializeField] private Button _button;
         private Action _onClick;
 
-        public void Set(string buttonText, Action onClick)
+        public void Setup(string buttonText, Action onClick)
         {
             _onClick = onClick;
             _text.text = buttonText;
