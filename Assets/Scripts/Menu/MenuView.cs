@@ -7,11 +7,11 @@ namespace Match3Bonus
     public class MenuView : MonoBehaviour
     {
         [SerializeField] private MenuBtnComp _btnTemplate;
-        [SerializeField] private List<MenuBtnComp> _cacheBtnComps;
+        [SerializeField] private List<MenuBtnComp> _cacheBtns;
 
         public void ShowButtons(List<SOPrize> prizes, Action<SOPrize> onClick)
         {
-            _btnTemplate.ShowCachedViews(prizes, _cacheBtnComps,
+            _btnTemplate.ShowCachedViews(prizes, _cacheBtns,
                 (btnComp, prize) =>
                 {
                     btnComp.Set(prize.Name, () => { onClick?.Invoke(prize); });
@@ -21,7 +21,7 @@ namespace Match3Bonus
 
         public void LockButtons()
         {
-            foreach (MenuBtnComp btnComp in _cacheBtnComps)
+            foreach (MenuBtnComp btnComp in _cacheBtns)
             {
                 btnComp.SetBtnEnable(false);
             }
