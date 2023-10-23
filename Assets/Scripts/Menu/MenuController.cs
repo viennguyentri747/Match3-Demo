@@ -10,19 +10,18 @@ namespace Match3Bonus
         [SerializeField] private List<SOPrize> _prizes;
         [SerializeField] private string _gameScene;
         [SerializeField] private MenuView _view;
-         
+
         private Queue<PrizeElement> _shuffledPrizes = new();
         private readonly IPrizesShuffler<SelectPrizePack> _prizesShuffler = new PrizesShufflerMatchSelected();
         private readonly SceneLoader _sceneLoader = new();
 
         private void Start()
         {
-            _view.ShowButtons(_prizes, OnClickButtonPrize);
+            _view.ShowButtons(_prizes);
         }
-        
-        private void OnClickButtonPrize(SOPrize selectedPrize)
+
+        public void OnSelectPrize(SOPrize selectedPrize)
         {
-            _view.LockButtons();
             CreateShuffledPrizes(selectedPrize);
             _sceneLoader.LoadScene(_gameScene, LoadSceneMode.Single, OnGameSceneLoaded);
         }
