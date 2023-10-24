@@ -1,19 +1,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 namespace Match3Bonus
 {
     public class MenuController : MonoBehaviour
     {
         [SerializeField] private List<SOPrize> _prizes;
-        [SerializeField] private string _gameScene;
         [SerializeField] private MenuView _view;
+        [SerializeField] private UnityEvent<SOPrize> _onPrizeSelected;
 
-        private Queue<PrizeElement> _shuffledPrizes = new();
         private readonly IPrizesShuffler<SelectPrizePack> _prizesShuffler = new PrizesShufflerMatchSelected();
-        private readonly SceneLoader _sceneLoader = new();
+        private SOPrize _selectedPrize;
 
         private void Start()
         {
@@ -22,24 +21,32 @@ namespace Match3Bonus
 
         public void OnSelectPrize(SOPrize selectedPrize)
         {
-            CreateShuffledPrizes(selectedPrize);
-            _sceneLoader.LoadScene(_gameScene, LoadSceneMode.Single, OnGameSceneLoaded);
+            _selectedPrize = selectedPrize;
+            _onPrizeSelected?.Invoke(selectedPrize);
         }
 
-        private void CreateShuffledPrizes(SOPrize selectedPrize)
+        public void SendShuffledPrizeData()
         {
-            SelectPrizePack selectPrizePack = new(selectedPrize, _prizes);
-            _shuffledPrizes = _prizesShuffler.GenerateShuffledPrizes(selectPrizePack);
-            LogHelper.Log($@"Shuffled Queue: {string.Join(",", _shuffledPrizes.Select(prize =>
+            PrizeQueueData queueData = GetShuffledPrizeQueueData();
+            List<IListener> listeners = ListenerHub.FindListeners<PrizeQueueData>();
+            foreach (IListener listener in listeners)
+            {
+                listener.ReceiveData(queueData);
+            }
+        }
+
+        private PrizeQueueData GetShuffledPrizeQueueData()
+        {
+            SelectPrizePack selectPrizePack = new(_selectedPrize, _prizes);
+            Queue<PrizeElement> shuffledPrizes = _prizesShuffler.GenerateShuffledPrizes(selectPrizePack);
+
+            LogHelper.Log($@"Shuffled Queue: {string.Join(",", shuffledPrizes.Select(prize =>
             {
                 string logStr = prize.IsMatched ? $"<color=red>{prize.Name}</color>" : prize.Name;
                 return logStr;
             }))}");
-        }
 
-        private void OnGameSceneLoaded()
-        {
-           //TODO: send shuffled prizes
+            return new PrizeQueueData(shuffledPrizes);
         }
     }
 }

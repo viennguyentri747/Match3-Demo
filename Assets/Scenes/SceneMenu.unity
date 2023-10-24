@@ -138,6 +138,9 @@ GameObject:
   - component: {fileID: 13247472}
   - component: {fileID: 13247473}
   - component: {fileID: 13247474}
+  - component: {fileID: 13247476}
+  - component: {fileID: 13247475}
+  - component: {fileID: 13247477}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -264,8 +267,34 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 594db2ebd3e1be64d8010921f51f018e, type: 2}
   - {fileID: 11400000, guid: 600de3bb86832a74d82bc7d729b92d29, type: 2}
   - {fileID: 11400000, guid: 8eb8beaa91723ff4080c43f5952439e6, type: 2}
-  _gameScene: 
   _view: {fileID: 13247474}
+  _onPrizeSelected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 13247476}
+        m_TargetAssemblyTypeName: Match3Bonus.SceneLoader, Assembly-CSharp
+        m_MethodName: PreloadScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: SceneGame
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 13247475}
+        m_TargetAssemblyTypeName: Match3Bonus.CanvasFader, Assembly-CSharp
+        m_MethodName: StartFade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &13247474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,7 +308,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _btnViewTemplate: {fileID: 820717790}
-  _cacheBtns: []
   _onShowButtons:
     m_PersistentCalls:
       m_Calls:
@@ -295,6 +323,92 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &13247475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13247467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cca1b40ea6374048bc64aee95e689a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvasGroup: {fileID: 2025150131}
+  _startAlpha: 1
+  _endAlpha: 0
+  _fadeDuration: 0.6
+  _onFadeComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 13247476}
+        m_TargetAssemblyTypeName: Match3Bonus.SceneLoader, Assembly-CSharp
+        m_MethodName: ActivateLoadedScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &13247476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13247467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cee5f782f6a48dcad9f668acb9794dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _loadSceneMode: 1
+  _onSceneLoaded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 13247473}
+        m_TargetAssemblyTypeName: Match3Bonus.MenuController, Assembly-CSharp
+        m_MethodName: SendShuffledPrizeData
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 13247477}
+        m_TargetAssemblyTypeName: Match3Bonus.SceneUnloader, Assembly-CSharp
+        m_MethodName: UnloadScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: SceneMenu
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &13247477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13247467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af89bdf535794ce293c34445eedaca3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _onUnloadScene:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &86078655
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,7 +604,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1313,6 +1427,7 @@ GameObject:
   - component: {fileID: 2025150127}
   - component: {fileID: 2025150126}
   - component: {fileID: 2025150130}
+  - component: {fileID: 2025150131}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -1429,3 +1544,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!225 &2025150131
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025150125}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

@@ -38,9 +38,8 @@ namespace Match3Bonus
                 SOPrize currentPrize = kvp.Key;
                 return remain > 0 && !(remain == 1 && !isMatchSelected && currentPrize != selected);
             }).Select(kvp => kvp.Key).ToList();
-            
-            int randomIndex = Random.Range(0, choices.Count);
-            return choices[randomIndex];
+
+            return choices.GetRandomElement();
         }
     }
 
