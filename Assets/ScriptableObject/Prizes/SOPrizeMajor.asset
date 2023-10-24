@@ -17,4 +17,4 @@ MonoBehaviour:
   _reward: 0
   _totalCount: 3
   _tokenAsset:
-    _animOverrideController: {fileID: 0}
+    _animOverrideController: {fileID: 22100000, guid: cb5831d6d11163946b5d4fc866f30821, type: 2}
