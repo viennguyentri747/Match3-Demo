@@ -23,7 +23,8 @@ namespace Match3Bonus
         {
             {
                 viewTemplate.SetActive(false);
-                for (int i = 0; i < viewDatas.Count; i++)
+                int datasCount = viewDatas.Count;
+                for (int i = 0; i < datasCount; i++)
                 {
                     TView view;
                     if (i < cacheViews.Count)
@@ -40,7 +41,7 @@ namespace Match3Bonus
                     setupView?.Invoke(view, viewDatas[i]);
                 }
 
-                for (int i = viewDatas.Count; i < cacheViews.Count; i++)
+                for (int i = datasCount; i < cacheViews.Count; i++)
                 {
                     cacheViews[i].SetActive(false);
                 }
