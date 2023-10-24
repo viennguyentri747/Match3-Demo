@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Match3Bonus
 {
     public class GameView : MonoBehaviour
     {
         [SerializeField] private TokenButtonView _tokenButtonTemplate;
+        [SerializeField] private UnityEvent<PrizeElement> _onRevealPrize;
+
         private readonly List<TokenButtonView> _cacheTokens = new();
         private Queue<PrizeElement> _prizes = new();
 
@@ -15,7 +18,7 @@ namespace Match3Bonus
             _tokenButtonTemplate.ShowCachedViews(prizes, _cacheTokens, (view, prize) => { view.Setup(view); });
         }
 
-        public void RevealRandomToken()
+        public void RevealRandomTokenView()
         {
             if (_cacheTokens.IsNullOrEmpty())
             {
@@ -35,6 +38,7 @@ namespace Match3Bonus
 
             PrizeElement nextPrize = _prizes.Dequeue();
             view.Reveal(nextPrize);
+            _onRevealPrize?.Invoke(nextPrize);
         }
     }
 }
