@@ -260,22 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d6edd783d04444c9461d2299797d75c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tokenButtonTemplate: {fileID: 9091497010007329640}
-  _onRevealPrize:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 13247474}
-        m_TargetAssemblyTypeName: Match3Bonus.GameController, Assembly-CSharp
-        m_MethodName: OnPrizeRevealed
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  _tokenTemplate: {fileID: 9091497010007329640}
 --- !u!114 &13247474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,7 +273,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4953f573090a4be690dc1b22083dba8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameView: {fileID: 13247473}
   _onEnable:
     m_PersistentCalls:
       m_Calls:
@@ -304,10 +288,76 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _onDataReady:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 13247473}
+        m_TargetAssemblyTypeName: Match3Bonus.GameView, Assembly-CSharp
+        m_MethodName: UnSelectToken
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 13247473}
+        m_TargetAssemblyTypeName: Match3Bonus.GameView, Assembly-CSharp
+        m_MethodName: ShowTokens
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onRevealNextPrize:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 13247473}
+        m_TargetAssemblyTypeName: Match3Bonus.GameView, Assembly-CSharp
+        m_MethodName: RevealSelectedOrRandomToken
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 13247474}
+        m_TargetAssemblyTypeName: Match3Bonus.GameViewModel, Assembly-CSharp
+        m_MethodName: CheckWin
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _onWin:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1770904689}
+      - m_Target: {fileID: 13247473}
+        m_TargetAssemblyTypeName: Match3Bonus.GameView, Assembly-CSharp
+        m_MethodName: LockTokens
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1564550040}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -911,13 +961,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1564550041}
   - component: {fileID: 1564550042}
+  - component: {fileID: 1564550043}
   m_Layer: 5
   m_Name: WinEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1564550041
 RectTransform:
   m_ObjectHideFlags: 0
@@ -961,6 +1012,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1564550043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564550040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e49bc97c0f0546ba9918cdfc46644df8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _onInvoke:
+    m_PersistentCalls:
+      m_Calls: []
+  _isRepeating: 1
+  _repeatInterval: 0
+  _delay: 0
 --- !u!1 &1770904689
 GameObject:
   m_ObjectHideFlags: 0
@@ -997,7 +1066,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1526}
+  m_AnchoredPosition: {x: 0, y: 514}
   m_SizeDelta: {x: 2048, y: 2048}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1770904691
@@ -1578,10 +1647,10 @@ RectTransform:
   m_Father: {fileID: 1326682838}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1020, y: -250}
-  m_SizeDelta: {x: 300, y: 300}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5424052245593353420
 MonoBehaviour:
@@ -1669,6 +1738,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 5424052245593353420}
+  _onSetupComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9091497010007329640}
+        m_TargetAssemblyTypeName: Match3Bonus.TokenButtonView, Assembly-CSharp
+        m_MethodName: UnlockAndHide
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Idle
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 9091497010007329639}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Idle
+          m_BoolArgument: 0
+        m_CallState: 2
   _onClick:
     m_PersistentCalls:
       m_Calls:
@@ -1686,7 +1782,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 13247473}
         m_TargetAssemblyTypeName: Match3Bonus.GameView, Assembly-CSharp
-        m_MethodName: RevealNextPrizeFor
+        m_MethodName: SetSelectedToken
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 9091497010007329640}
@@ -1696,7 +1792,49 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 13247474}
+        m_TargetAssemblyTypeName: Match3Bonus.GameController, Assembly-CSharp
+        m_MethodName: RevealNextPrize
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _animator: {fileID: 9091497010007329639}
+  _onLock:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5424052245593353420}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onUnlock:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5424052245593353420}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   _onReveal:
     m_PersistentCalls:
       m_Calls:
@@ -1704,6 +1842,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
         m_MethodName: SetTrigger
         m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Reveal
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 9091497010007329640}
+        m_TargetAssemblyTypeName: Match3Bonus.TokenButtonView, Assembly-CSharp
+        m_MethodName: Lock
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

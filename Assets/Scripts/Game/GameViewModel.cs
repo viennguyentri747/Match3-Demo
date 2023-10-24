@@ -5,12 +5,14 @@ using UnityEngine.Events;
 
 namespace Match3Bonus
 {
-    public class GameController : MonoListener<PrizeQueueData>
+    public class GameViewModel : MonoListener<PrizeQueueData>
     {
-        [SerializeField] private GameView _gameView;
         [SerializeField] private UnityEvent _onEnable;
+        [SerializeField] private UnityEvent<PrizeQueueData> _onDataReady;
+        [SerializeField] private UnityEvent<PrizeElement> _onRevealNextPrize;
         [SerializeField] private UnityEvent _onWin;
 
+        private Queue<PrizeElement> _prizes;
         private PrizeElement _lastMatchedPrize;
 
         private void OnEnable()
@@ -26,19 +28,29 @@ namespace Match3Bonus
 
         protected override void OnReceiveData(PrizeQueueData data)
         {
-            Queue<PrizeElement> queue = data.PrizeQueue;
-            _lastMatchedPrize = queue.LastOrDefault(element => element.IsMatched == true);
-            _gameView.ShowTokens(queue);
+            _prizes = data.PrizeQueue;
+            _lastMatchedPrize = _prizes.LastOrDefault(element => element.IsMatched);
+            _onDataReady?.Invoke(data);
         }
 
-        public void OnPrizeRevealed(PrizeElement prizeElement)
+        public void RevealNextPrize()
         {
-            if (prizeElement != _lastMatchedPrize)
+            if (_prizes.IsNullOrEmpty())
             {
+                LogHelper.LogError("No prize to reveal");
                 return;
             }
 
-            _onWin?.Invoke();
+            PrizeElement nextPrize = _prizes.Dequeue();
+            _onRevealNextPrize?.Invoke(nextPrize);
+        }
+
+        public void CheckWin(PrizeElement prize)
+        {
+            if (prize == _lastMatchedPrize)
+            {
+                _onWin?.Invoke();
+            }
         }
     }
 
