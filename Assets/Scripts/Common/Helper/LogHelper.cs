@@ -6,38 +6,17 @@ namespace Match3Bonus
 {
     public static class LogHelper
     {
-        public static void LogErrorLoop<T>(IEnumerable<T> collection, Func<T, string> getLogStr)
+        public static void LogError(object message)
         {
 #if UNITY_EDITOR
-            foreach (T element in collection)
-            {
-                string logStr = getLogStr.Invoke(element);
-                LogError(logStr);
-            }
+            Debug.LogError(message);
 #endif
         }
 
-        public static void LogErrorIf(bool isHappen, string str)
+        public static void Log(object message)
         {
 #if UNITY_EDITOR
-            if (isHappen)
-            {
-                LogError(str);
-            }
-#endif
-        }
-
-        public static void LogError(string str)
-        {
-#if UNITY_EDITOR
-            Debug.LogError(str);
-#endif
-        }
-        
-        public static void Log(string str)
-        {
-#if UNITY_EDITOR
-            Debug.Log(str);
+            Debug.Log(message);
 #endif
         }
     }
