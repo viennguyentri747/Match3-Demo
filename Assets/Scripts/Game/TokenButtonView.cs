@@ -6,7 +6,7 @@ namespace Match3Bonus
     public class TokenButtonView : ButtonView<TokenButtonView>
     {
         [SerializeField] private Animator _animator;
-        [SerializeField] private UnityEvent _reveal;
+        [SerializeField] private UnityEvent _onReveal;
 
         protected override void OnSetup(TokenButtonView tokenButtonView)
         {
@@ -15,7 +15,7 @@ namespace Match3Bonus
         public void Reveal(PrizeElement prizeElement)
         {
             _animator.runtimeAnimatorController = prizeElement.TokenAsset.AnimOverrideController;
-            _reveal?.Invoke();
+            _onReveal?.Invoke();
         }
     }
 }
