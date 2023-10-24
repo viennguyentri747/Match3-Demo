@@ -33,7 +33,7 @@ namespace Match3Bonus
 
         public void RevealSelectedOrRandomToken(PrizeElement prize)
         {
-            TokenButtonView token = _selectToken != null ? _selectToken : _cacheTokens.FirstOrDefault(token => !token.IsReveal);
+            TokenButtonView token = _selectToken != null ? _selectToken : _cacheTokens.FirstOrDefault(token => !token.IsReveal && !token.IsLock);
             if (token == null)
             {
                 LogHelper.LogError("No token to reveal");
@@ -42,7 +42,7 @@ namespace Match3Bonus
 
             token.Reveal(prize);
         }
-        
+
         public void LockTokensTemporary()
         {
             LockTokens(view => _tempLockTokens.Add(view));
