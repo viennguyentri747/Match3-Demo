@@ -21,5 +21,6 @@ namespace Match3Bonus
     public class TokenAsset
     {
         [SerializeField] private AnimatorOverrideController _animOverrideController;
+        public AnimatorOverrideController AnimOverrideController => _animOverrideController;
     }
 }

@@ -8,7 +8,6 @@ namespace Match3Bonus
     public abstract class ButtonView<T> : MonoBehaviour
     {
         [SerializeField] private Button _button;
-        [SerializeField] private UnityEvent<T> _onSetup;
         [SerializeField] private UnityEvent<T> _onClick;
         private T _data;
 
@@ -16,7 +15,6 @@ namespace Match3Bonus
         {
             _data = data;
             OnSetup(data);
-            _onSetup?.Invoke(_data);
         }
 
         protected abstract void OnSetup(T data);
