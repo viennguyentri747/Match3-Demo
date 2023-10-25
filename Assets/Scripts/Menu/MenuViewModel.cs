@@ -5,18 +5,18 @@ using UnityEngine.Events;
 
 namespace Match3Bonus
 {
-    public class MenuController : MonoBehaviour
+    public class MenuViewModel : MonoBehaviour
     {
         [SerializeField] private List<SOPrize> _prizes;
-        [SerializeField] private MenuView _view;
+        [SerializeField] private UnityEvent<List<SOPrize>> _onDataReady;
         [SerializeField] private UnityEvent<SOPrize> _onPrizeSelected;
 
         private readonly IPrizesShuffler<SelectPrizePack> _prizesShuffler = new PrizesShufflerMatchSelected();
         private SOPrize _selectedPrize;
 
-        private void Start()
+        public void Start()
         {
-            _view.ShowButtons(_prizes);
+            _onDataReady?.Invoke(_prizes);
         }
 
         public void OnSelectPrize(SOPrize selectedPrize)
