@@ -8,21 +8,25 @@ namespace Match3Bonus
     {
         [SerializeField] private LoadSceneMode _loadSceneMode;
         [SerializeField] private UnityEvent _onSceneLoaded;
+
         private AsyncOperation _loadOperation;
+        private bool _isActivateAsap = false;
 
         public void PreloadScene(string sceneName)
         {
             _loadOperation = SceneManager.LoadSceneAsync(sceneName, _loadSceneMode);
             _loadOperation.completed += OnSceneLoaded;
-            _loadOperation.allowSceneActivation = false;
+            _loadOperation.allowSceneActivation = _isActivateAsap;
         }
 
-        public void ActivateLoadedScene()
+        public void SetSceneActivateASAP(bool isOn)
         {
             if (_loadOperation != null)
             {
-                _loadOperation.allowSceneActivation = true;
+                _loadOperation.allowSceneActivation = isOn;
             }
+
+            _isActivateAsap = isOn;
         }
 
         private void OnSceneLoaded(AsyncOperation operation)
