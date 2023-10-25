@@ -38,7 +38,7 @@ namespace Match3Bonus
                 return remain > 0 && !(remain == 1 && !isMatchSelected && currentPrize != selected);
             }).Select(kvp => kvp.Key).ToList();
 
-            return choices.GetRandomElement();
+            return choices.GetRandomElementOrDefault();
         }
     }
 
