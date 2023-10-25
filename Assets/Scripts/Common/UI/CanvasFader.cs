@@ -12,7 +12,7 @@ namespace Match3Bonus
         [SerializeField] private float _fadeDuration;
         [SerializeField] private UnityEvent _onFadeComplete;
 
-        private readonly CountdownRoutine _countDownRoutine = new();
+        private readonly CountDownRoutine _countDownRoutine = new();
 
         public void StartFade()
         {

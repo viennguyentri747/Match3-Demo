@@ -12,7 +12,7 @@ namespace Match3Bonus
         [SerializeField] private bool _isRepeating;
         [SerializeField] private float _repeatInterval;
 
-        private readonly CountdownRoutine _countDownRoutine = new();
+        private readonly CountDownRoutine _countDownRoutine = new();
         private Coroutine _coroutineInvoke;
 
         public void StartInvokeRoutine()

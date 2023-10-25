@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Match3Bonus
 {
-    public class CountdownRoutine
+    public class CountDownRoutine
     {
         private float _countDown;
 
