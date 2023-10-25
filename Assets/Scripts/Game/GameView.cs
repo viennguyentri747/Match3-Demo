@@ -82,6 +82,7 @@ namespace Match3Bonus
             {
                 view.Unlock();
             }
+            _tempLockTokens.Clear();
         }
     }
 }

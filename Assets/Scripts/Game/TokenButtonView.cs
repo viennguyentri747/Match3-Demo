@@ -13,9 +13,15 @@ namespace Match3Bonus
         private bool _isReveal;
         public bool IsLock => _isLock;
         public bool IsReveal => _isReveal;
+        private PrizeElement _prizeElement;
 
         protected override void OnSetup(int index)
         {
+        }
+
+        public void ResetElement()
+        {
+            _prizeElement = null;
         }
 
         public void UnlockAndHide()
@@ -31,6 +37,7 @@ namespace Match3Bonus
 
         public void Reveal(PrizeElement prizeElement)
         {
+            _prizeElement = prizeElement;
             _animator.runtimeAnimatorController = prizeElement.TokenAsset.AnimOverrideController;
             _isReveal = true;
             _onReveal?.Invoke();
@@ -46,6 +53,11 @@ namespace Match3Bonus
         {
             _isLock = false;
             _onUnlock?.Invoke();
+        }
+
+        public PrizeElement GetShowingElement()
+        {
+            return _prizeElement;
         }
     }
 }
