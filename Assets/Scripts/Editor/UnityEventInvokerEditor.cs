@@ -9,14 +9,14 @@ namespace Match3Bonus
         private SerializedProperty _onInvoke;
         private SerializedProperty _isRepeating;
         private SerializedProperty _repeatInterval;
-        private SerializedProperty _delay;
+        private SerializedProperty _delayFirstInvoke;
 
         private void OnEnable()
         {
             _onInvoke = serializedObject.FindProperty(nameof(_onInvoke));
             _isRepeating = serializedObject.FindProperty(nameof(_isRepeating));
             _repeatInterval = serializedObject.FindProperty(nameof(_repeatInterval));
-            _delay = serializedObject.FindProperty(nameof(_delay));
+            _delayFirstInvoke = serializedObject.FindProperty(nameof(_delayFirstInvoke));
         }
 
         public override void OnInspectorGUI()
@@ -32,7 +32,7 @@ namespace Match3Bonus
                 EditorGUI.indentLevel--;
             }
 
-            EditorGUILayout.PropertyField(_delay);
+            EditorGUILayout.PropertyField(_delayFirstInvoke);
 
             serializedObject.ApplyModifiedProperties();
         }
