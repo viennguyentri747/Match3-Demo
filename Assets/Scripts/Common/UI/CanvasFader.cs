@@ -22,10 +22,10 @@ namespace Match3Bonus
         private IEnumerator UpdateFade()
         {
             yield return _countDownRoutine.RoutineCountdownInvoke(_fadeDuration, () => _onFadeComplete?.Invoke(),
-                (countDownTime) =>
+                (timeCountDown) =>
                 {
-                    float progress = _fadeDuration - countDownTime;
-                    _canvasGroup.alpha = Mathf.Lerp(_startAlpha, _endAlpha, progress / _fadeDuration);
+                    float progress = (_fadeDuration - timeCountDown)/ _fadeDuration;
+                    _canvasGroup.alpha = Mathf.Lerp(_startAlpha, _endAlpha, progress);
                 });
         }
     }
