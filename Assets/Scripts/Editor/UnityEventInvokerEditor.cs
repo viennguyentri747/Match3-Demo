@@ -7,6 +7,7 @@ namespace Match3Bonus
     public class UnityEventInvokerEditor : Editor
     {
         private SerializedProperty _onInvoke;
+        private SerializedProperty _onCountdownTimerUpdate;
         private SerializedProperty _isRepeating;
         private SerializedProperty _repeatInterval;
         private SerializedProperty _delayFirstInvoke;
@@ -14,6 +15,7 @@ namespace Match3Bonus
         private void OnEnable()
         {
             _onInvoke = serializedObject.FindProperty(nameof(_onInvoke));
+            _onCountdownTimerUpdate = serializedObject.FindProperty(nameof(_onCountdownTimerUpdate));
             _isRepeating = serializedObject.FindProperty(nameof(_isRepeating));
             _repeatInterval = serializedObject.FindProperty(nameof(_repeatInterval));
             _delayFirstInvoke = serializedObject.FindProperty(nameof(_delayFirstInvoke));
@@ -24,6 +26,7 @@ namespace Match3Bonus
             serializedObject.Update();
 
             EditorGUILayout.PropertyField(_onInvoke);
+            EditorGUILayout.PropertyField(_onCountdownTimerUpdate);
             EditorGUILayout.PropertyField(_isRepeating);
             if (_isRepeating.boolValue)
             {

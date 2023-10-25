@@ -7,12 +7,23 @@ namespace Match3Bonus
     public class UnityEventInvoker : MonoBehaviour
     {
         [SerializeField] private UnityEvent _onInvoke;
+        [SerializeField] private UnityEvent<float> _onCountdownTimerUpdate;
         [SerializeField] private float _delayFirstInvoke;
         [SerializeField] private bool _isRepeating;
         [SerializeField] private float _repeatInterval;
 
         private Coroutine _invokeRoutine;
         private float _countdownTimer;
+
+        private float CountdownTimer
+        {
+            set
+            {
+                _countdownTimer = value;
+                _onCountdownTimerUpdate?.Invoke(value);
+            }
+            get => _countdownTimer;
+        }
 
         public void StartInvokeRoutine()
         {
@@ -31,27 +42,35 @@ namespace Match3Bonus
 
         private IEnumerator RoutineInvokeInterval()
         {
-            yield return new WaitForSeconds(_delayFirstInvoke);
-
-            Invoke();
+            CountdownTimer = _delayFirstInvoke;
+            yield return UpdateTimerToInvoke();
+            ResetIntervalTimer();
 
             while (_isRepeating)
             {
-                if (_countdownTimer <= 0)
+                yield return UpdateTimerToInvoke();
+            }
+        }
+
+        private IEnumerator UpdateTimerToInvoke()
+        {
+            while (true)
+            {
+                if (CountdownTimer <= 0)
                 {
                     ResetIntervalTimer();
                     Invoke();
+                    yield break;
                 }
 
-                _countdownTimer -= Time.deltaTime;
-                LogHelper.LogError(_countdownTimer);
+                CountdownTimer -= Time.deltaTime;
                 yield return null;
             }
         }
 
         public void ResetIntervalTimer()
         {
-            _countdownTimer = _repeatInterval;
+            CountdownTimer = _repeatInterval;
         }
 
         private void Invoke()
