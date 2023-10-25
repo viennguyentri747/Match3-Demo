@@ -36,7 +36,7 @@ namespace Match3Bonus
             TokenButtonView token = IsValidToReveal(_selectToken)
                 ? _selectToken
                 : _cacheTokens.FirstOrDefault(IsValidToReveal);
-            
+
             if (token == null)
             {
                 LogHelper.LogError("No token to reveal");
@@ -56,8 +56,9 @@ namespace Match3Bonus
             LockTokens(view => _tempLockTokens.Add(view));
         }
 
-        public void LockTokens()
+        public void LockTokensForce()
         {
+            _tempLockTokens.Clear();
             LockTokens(null);
         }
 
