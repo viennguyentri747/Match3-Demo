@@ -13,7 +13,11 @@ namespace Match3Bonus
 
         public void StartListenOnEnter(string stateToListen)
         {
-            StopListen();
+            if (_coroutineListen != null)
+            {
+                StopCoroutine(_coroutineListen);
+            }
+
             if (!IsSameState(stateToListen))
             {
                 _coroutineListen = StartCoroutine(RoutineListen(stateToListen));
@@ -37,14 +41,6 @@ namespace Match3Bonus
         private bool IsSameState(string stateName)
         {
             return _animator.GetCurrentAnimatorStateInfo(0).IsName(stateName);
-        }
-
-        public void StopListen()
-        {
-            if (_coroutineListen != null)
-            {
-                StopCoroutine(_coroutineListen);
-            }
         }
     }
 }
