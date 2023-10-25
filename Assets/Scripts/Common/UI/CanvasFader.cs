@@ -12,7 +12,7 @@ namespace Match3Bonus
         [SerializeField] private float _fadeDuration;
         [SerializeField] private UnityEvent _onFadeComplete;
 
-        private CountdownRoutine _countdownRoutine;
+        private readonly CountdownRoutine _countDownRoutine = new();
 
         public void StartFade()
         {
@@ -21,7 +21,7 @@ namespace Match3Bonus
 
         private IEnumerator UpdateFade()
         {
-            yield return _countdownRoutine.RoutineCountdownInvoke(_fadeDuration, () => _onFadeComplete?.Invoke(),
+            yield return _countDownRoutine.RoutineCountdownInvoke(_fadeDuration, () => _onFadeComplete?.Invoke(),
                 (countDownTime) =>
                 {
                     float progress = _fadeDuration - countDownTime;
