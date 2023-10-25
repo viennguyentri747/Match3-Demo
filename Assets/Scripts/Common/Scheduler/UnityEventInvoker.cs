@@ -12,65 +12,43 @@ namespace Match3Bonus
         [SerializeField] private bool _isRepeating;
         [SerializeField] private float _repeatInterval;
 
-        private Coroutine _invokeRoutine;
-        private float _countdownTimer;
-
-        private float CountdownTimer
-        {
-            set
-            {
-                _countdownTimer = value;
-                _onCountdownTimerUpdate?.Invoke(value);
-            }
-            get => _countdownTimer;
-        }
+        private readonly CountdownRoutine _countDownRoutine = new();
+        private Coroutine _coroutineInvoke;
 
         public void StartInvokeRoutine()
         {
             StopInvokeRoutine();
             ResetIntervalTimer();
-            _invokeRoutine = StartCoroutine(RoutineInvokeInterval());
-        }
-
-        public void StopInvokeRoutine()
-        {
-            if (_invokeRoutine != null)
-            {
-                StopCoroutine(_invokeRoutine);
-            }
+            _coroutineInvoke = StartCoroutine(RoutineInvokeInterval());
         }
 
         private IEnumerator RoutineInvokeInterval()
         {
-            CountdownTimer = _delayFirstInvoke;
-            yield return UpdateTimerToInvoke();
-            ResetIntervalTimer();
+            _ = _delayFirstInvoke;
+            yield return _countDownRoutine.RoutineCountdownInvoke(_delayFirstInvoke, Invoke, OnTimerUpdate);
 
             while (_isRepeating)
             {
-                yield return UpdateTimerToInvoke();
+                yield return _countDownRoutine.RoutineCountdownInvoke(_repeatInterval, Invoke, OnTimerUpdate);
             }
         }
 
-        private IEnumerator UpdateTimerToInvoke()
+        private void OnTimerUpdate(float countDownTime)
         {
-            while (true)
-            {
-                if (CountdownTimer <= 0)
-                {
-                    ResetIntervalTimer();
-                    Invoke();
-                    yield break;
-                }
+            _onCountdownTimerUpdate?.Invoke(countDownTime);
+        }
 
-                CountdownTimer -= Time.deltaTime;
-                yield return null;
+        public void StopInvokeRoutine()
+        {
+            if (_coroutineInvoke != null)
+            {
+                StopCoroutine(_coroutineInvoke);
             }
         }
 
         public void ResetIntervalTimer()
         {
-            CountdownTimer = _repeatInterval;
+            _countDownRoutine.ResetCountdown(_repeatInterval);
         }
 
         private void Invoke()

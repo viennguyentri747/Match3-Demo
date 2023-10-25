@@ -12,6 +12,8 @@ namespace Match3Bonus
         [SerializeField] private float _fadeDuration;
         [SerializeField] private UnityEvent _onFadeComplete;
 
+        private CountdownRoutine _countdownRoutine;
+
         public void StartFade()
         {
             StartCoroutine(UpdateFade());
@@ -19,15 +21,12 @@ namespace Match3Bonus
 
         private IEnumerator UpdateFade()
         {
-            float progress = 0f;
-            while (progress < _fadeDuration)
-            {
-                progress += Time.deltaTime;
-                _canvasGroup.alpha = Mathf.Lerp(_startAlpha, _endAlpha, progress / _fadeDuration);
-                yield return null;
-            }
-
-            _onFadeComplete?.Invoke();
+            yield return _countdownRoutine.RoutineCountdownInvoke(_fadeDuration, () => _onFadeComplete?.Invoke(),
+                (countDownTime) =>
+                {
+                    float progress = _fadeDuration - countDownTime;
+                    _canvasGroup.alpha = Mathf.Lerp(_startAlpha, _endAlpha, progress / _fadeDuration);
+                });
         }
     }
 }

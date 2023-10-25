@@ -9,14 +9,14 @@ namespace Match3Bonus
         [SerializeField] private Animator _animator;
         [SerializeField] private UnityEvent<string> _onStateEnter;
 
-        private Coroutine _routineListen;
+        private Coroutine _coroutineListen;
 
         public void StartListenOnEnter(string stateToListen)
         {
             StopListen();
             if (!IsSameState(stateToListen))
             {
-                _routineListen = StartCoroutine(RoutineListen(stateToListen));
+                _coroutineListen = StartCoroutine(RoutineListen(stateToListen));
             }
         }
 
@@ -41,9 +41,9 @@ namespace Match3Bonus
 
         public void StopListen()
         {
-            if (_routineListen != null)
+            if (_coroutineListen != null)
             {
-                StopCoroutine(_routineListen);
+                StopCoroutine(_coroutineListen);
             }
         }
     }
