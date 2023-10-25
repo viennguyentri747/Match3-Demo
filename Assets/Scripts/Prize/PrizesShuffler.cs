@@ -16,6 +16,4 @@ namespace Match3Bonus
             Prizes = prizes;
         }
     }
-
-    
 }

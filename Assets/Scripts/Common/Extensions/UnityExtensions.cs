@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Match3Bonus
@@ -11,10 +10,8 @@ namespace Match3Bonus
             IList<TView> cacheViews, Action<TView, TData> setupView) where TView : MonoBehaviour
         {
             {
-                ShowCachedViews(viewTemplate, viewDatas.Count, cacheViews, (view, index) =>
-                {
-                    setupView?.Invoke(view, viewDatas[index]);
-                });
+                ShowCachedViews(viewTemplate, viewDatas.Count, cacheViews,
+                    (view, index) => { setupView?.Invoke(view, viewDatas[index]); });
             }
         }
 

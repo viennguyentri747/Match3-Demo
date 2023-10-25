@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Match3Bonus
 {
@@ -82,6 +81,7 @@ namespace Match3Bonus
             {
                 view.Unlock();
             }
+
             _tempLockTokens.Clear();
         }
     }

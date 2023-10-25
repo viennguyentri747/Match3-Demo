@@ -10,7 +10,7 @@ namespace Match3Bonus
         [SerializeField] private UnityEvent _onSceneLoaded;
 
         private AsyncOperation _loadOperation;
-        private bool _isActivateAsap = false;
+        private bool _isActivateAsap;
 
         public void PreloadScene(string sceneName)
         {

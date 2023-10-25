@@ -6,7 +6,7 @@ namespace Match3Bonus
     public abstract class MonoListener<T> : MonoBehaviour, IListener where T : IDataToListen
     {
         public Type DataType => typeof(T);
-        
+
         public void ReceiveData(IDataToListen data)
         {
             if (data is T listenData)
