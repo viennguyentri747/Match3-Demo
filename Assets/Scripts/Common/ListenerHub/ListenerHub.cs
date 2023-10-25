@@ -5,7 +5,6 @@ namespace Match3Bonus
 {
     public static class ListenerHub
     {
-        //We can design to have multiple listeners if need
         private static readonly Dictionary<Type, List<IListener>> _dictionary = new();
 
         public static void RegisterListener(IListener listener)
