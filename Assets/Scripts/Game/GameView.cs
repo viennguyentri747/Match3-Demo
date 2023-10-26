@@ -97,7 +97,7 @@ namespace Match3Bonus
             _tempLockTokens.Clear();
         }
 
-        public void HighlightRevealedPrizesThatMatched()
+        public void HighlightMatchedPrizes()
         {
             foreach (KeyValuePair<TokenButtonView, PrizeElement> kvp in _revealedTokens)
             {

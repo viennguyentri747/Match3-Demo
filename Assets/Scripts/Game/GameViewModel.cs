@@ -7,7 +7,7 @@ namespace Match3Bonus
 {
     public class GameViewModel : MonoListener<PrizeQueueData>
     {
-        [SerializeField] private UnityEvent _onEnable;
+        [SerializeField] private UnityEvent _onStart;
         [SerializeField] private UnityEvent<PrizeQueueData> _onDataReady;
         [SerializeField] private UnityEvent<PrizeElement> _onRevealNextPrize;
         [SerializeField] private UnityEvent<PrizeElement> _onRevealAuto;
@@ -17,10 +17,15 @@ namespace Match3Bonus
         private Queue<PrizeElement> _prizes;
         private PrizeElement _lastMatchedPrize;
 
+
         private void OnEnable()
         {
-            _onEnable?.Invoke();
             ListenerHub.RegisterListener(this);
+        }
+
+        private void OnStart()
+        {
+            _onStart?.Invoke();
         }
 
         private void OnDisable()

@@ -8,6 +8,7 @@ namespace Match3Bonus
     public class MenuViewModel : MonoBehaviour
     {
         [SerializeField] private List<SOPrize> _prizes;
+        [SerializeField] private UnityEvent _onStart;
         [SerializeField] private UnityEvent<List<SOPrize>> _onDataReady;
         [SerializeField] private UnityEvent<SOPrize> _onPrizeSelected;
 
@@ -16,6 +17,7 @@ namespace Match3Bonus
 
         public void Start()
         {
+            _onStart?.Invoke();
             LogHelper.LogEnumerable("Prizes: ", _prizes, prize => prize.Name);
             _onDataReady?.Invoke(_prizes);
         }

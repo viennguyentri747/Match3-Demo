@@ -184,6 +184,21 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 594db2ebd3e1be64d8010921f51f018e, type: 2}
   - {fileID: 11400000, guid: 600de3bb86832a74d82bc7d729b92d29, type: 2}
   - {fileID: 11400000, guid: 8eb8beaa91723ff4080c43f5952439e6, type: 2}
+  _onStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 13247475}
+        m_TargetAssemblyTypeName: Match3Bonus.CanvasFader, Assembly-CSharp
+        m_MethodName: StartFade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _onDataReady:
     m_PersistentCalls:
       m_Calls:
@@ -204,7 +219,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 13247475}
         m_TargetAssemblyTypeName: Match3Bonus.CanvasFader, Assembly-CSharp
-        m_MethodName: StartFade
+        m_MethodName: StartRevertFade
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -239,8 +254,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 2025150131}
-  _startAlpha: 1
-  _endAlpha: 0
+  _startAlpha: 0
+  _endAlpha: 1
   _fadeDuration: 0.6
   _onFadeComplete:
     m_PersistentCalls:
@@ -601,10 +616,10 @@ RectTransform:
   m_Father: {fileID: 1326682838}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1028, y: -300}
-  m_SizeDelta: {x: 900, y: 400}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &820717787
 CanvasRenderer:

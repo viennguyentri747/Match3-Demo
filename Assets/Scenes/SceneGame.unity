@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4953f573090a4be690dc1b22083dba8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onEnable:
+  _onStart:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 13247475}
@@ -341,7 +341,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 797925390}
         m_TargetAssemblyTypeName: Match3Bonus.GameView, Assembly-CSharp
-        m_MethodName: HighlightRevealedPrizesThatMatched
+        m_MethodName: HighlightMatchedPrizes
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
