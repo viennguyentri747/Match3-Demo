@@ -288,10 +288,34 @@ MonoBehaviour:
   _onRevealAuto:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 13247476}
+        m_TargetAssemblyTypeName: Match3Bonus.UnityEventInvoker, Assembly-CSharp
+        m_MethodName: ResetIntervalTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 797925390}
         m_TargetAssemblyTypeName: Match3Bonus.GameView, Assembly-CSharp
         m_MethodName: RevealAuto
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 797925390}
+        m_TargetAssemblyTypeName: Match3Bonus.GameView, Assembly-CSharp
+        m_MethodName: UnSelectToken
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
