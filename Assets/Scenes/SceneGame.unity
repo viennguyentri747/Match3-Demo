@@ -134,10 +134,10 @@ GameObject:
   - component: {fileID: 13247468}
   - component: {fileID: 13247471}
   - component: {fileID: 13247474}
-  - component: {fileID: 13247473}
   - component: {fileID: 13247475}
   - component: {fileID: 13247476}
-  - component: {fileID: 13247477}
+  - component: {fileID: 13247478}
+  - component: {fileID: 13247479}
   m_Layer: 5
   m_Name: GameControl
   m_TagString: Untagged
@@ -168,19 +168,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 13247467}
   m_CullTransparentMesh: 1
---- !u!114 &13247473
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 13247467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d6edd783d04444c9461d2299797d75c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _tokenTemplate: {fileID: 9091497010007329640}
 --- !u!114 &13247474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,7 +198,7 @@ MonoBehaviour:
   _onDataReady:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 13247473}
+      - m_Target: {fileID: 797925390}
         m_TargetAssemblyTypeName: Match3Bonus.GameView, Assembly-CSharp
         m_MethodName: ShowTokens
         m_Mode: 0
@@ -250,7 +237,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 13247473}
+      - m_Target: {fileID: 797925390}
         m_TargetAssemblyTypeName: Match3Bonus.GameView, Assembly-CSharp
         m_MethodName: RevealSelectedOrRandomToken
         m_Mode: 0
@@ -262,7 +249,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 13247473}
+      - m_Target: {fileID: 797925390}
         m_TargetAssemblyTypeName: Match3Bonus.GameView, Assembly-CSharp
         m_MethodName: UnSelectToken
         m_Mode: 1
@@ -274,7 +261,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 13247473}
+      - m_Target: {fileID: 797925390}
         m_TargetAssemblyTypeName: Match3Bonus.GameView, Assembly-CSharp
         m_MethodName: LockUnRevealedTokensTemporary
         m_Mode: 1
@@ -301,7 +288,7 @@ MonoBehaviour:
   _onRevealAuto:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 13247473}
+      - m_Target: {fileID: 797925390}
         m_TargetAssemblyTypeName: Match3Bonus.GameView, Assembly-CSharp
         m_MethodName: RevealAuto
         m_Mode: 0
@@ -328,7 +315,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 13247473}
+      - m_Target: {fileID: 797925390}
         m_TargetAssemblyTypeName: Match3Bonus.GameView, Assembly-CSharp
         m_MethodName: UnlockTemporaryLockedTokens
         m_Mode: 1
@@ -352,7 +339,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 13247473}
+      - m_Target: {fileID: 797925390}
         m_TargetAssemblyTypeName: Match3Bonus.GameView, Assembly-CSharp
         m_MethodName: HighlightRevealedPrizesThatMatched
         m_Mode: 1
@@ -376,6 +363,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  _onEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 13247475}
+        m_TargetAssemblyTypeName: Match3Bonus.CanvasFader, Assembly-CSharp
+        m_MethodName: StartRevertFade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Menu
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 13247478}
+        m_TargetAssemblyTypeName: Match3Bonus.SceneLoader, Assembly-CSharp
+        m_MethodName: PreloadScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: SceneMenu
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &13247475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,6 +409,21 @@ MonoBehaviour:
   _onFadeComplete:
     m_PersistentCalls:
       m_Calls: []
+  _onRevertFadeComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 13247478}
+        m_TargetAssemblyTypeName: Match3Bonus.SceneLoader, Assembly-CSharp
+        m_MethodName: SetSceneActivateASAP
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &13247476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -425,7 +454,7 @@ MonoBehaviour:
   _onCountdownTimerUpdate:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 13247477}
+      - m_Target: {fileID: 1426933739}
         m_TargetAssemblyTypeName: Match3Bonus.TimerView, Assembly-CSharp
         m_MethodName: SetTime
         m_Mode: 0
@@ -440,7 +469,7 @@ MonoBehaviour:
   _delayFirstInvoke: 20
   _isRepeating: 1
   _repeatInterval: 20
---- !u!114 &13247477
+--- !u!114 &13247478
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -449,44 +478,40 @@ MonoBehaviour:
   m_GameObject: {fileID: 13247467}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20bf223a285e437ead69188f61085ad1, type: 3}
+  m_Script: {fileID: 11500000, guid: 2cee5f782f6a48dcad9f668acb9794dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timerTxt: {fileID: 1426933737}
-  _isCapTimeShow: 1
-  _rangeTimeShow:
-    _min: 0.1
-    _max: 10
-  _onShow:
+  _loadSceneMode: 1
+  _onSceneLoaded:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1426933735}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 13247479}
+        m_TargetAssemblyTypeName: Match3Bonus.SceneUnloader, Assembly-CSharp
+        m_MethodName: UnloadScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  _onHide:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1426933735}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: SceneGame
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &13247479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13247467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af89bdf535794ce293c34445eedaca3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _onUnloadScene:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &128703885
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,8 +861,9 @@ GameObject:
   - component: {fileID: 797925386}
   - component: {fileID: 797925388}
   - component: {fileID: 797925389}
+  - component: {fileID: 797925390}
   m_Layer: 5
-  m_Name: ReelScrollView
+  m_Name: GameView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -932,6 +958,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &797925390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 797925383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d6edd783d04444c9461d2299797d75c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tokenTemplate: {fileID: 9091497010007329640}
 --- !u!1 &825592857
 GameObject:
   m_ObjectHideFlags: 0
@@ -1109,6 +1148,7 @@ GameObject:
   - component: {fileID: 1426933736}
   - component: {fileID: 1426933738}
   - component: {fileID: 1426933737}
+  - component: {fileID: 1426933739}
   m_Layer: 5
   m_Name: Timer
   m_TagString: Untagged
@@ -1178,6 +1218,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1426933735}
   m_CullTransparentMesh: 1
+--- !u!114 &1426933739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426933735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20bf223a285e437ead69188f61085ad1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timerTxt: {fileID: 1426933737}
+  _isCapTimeShow: 1
+  _rangeTimeShow:
+    _min: 0.1
+    _max: 10.9
+  _onShow:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1426933735}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  _onHide:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1426933735}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1517659952
 GameObject:
   m_ObjectHideFlags: 0
@@ -1264,6 +1351,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1564550041}
   - component: {fileID: 1564550042}
+  - component: {fileID: 1564550044}
   - component: {fileID: 1564550043}
   m_Layer: 5
   m_Name: WinEffect
@@ -1324,18 +1412,53 @@ MonoBehaviour:
   m_GameObject: {fileID: 1564550040}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e49bc97c0f0546ba9918cdfc46644df8, type: 3}
+  m_Script: {fileID: 11500000, guid: d884529b410d470da8a45dd9bd0ddc89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onInvoke:
+  _animator: {fileID: 1564550042}
+  _stateToListen: Shown
+  _onStateEnter:
     m_PersistentCalls:
-      m_Calls: []
-  _onCountdownTimerUpdate:
+      m_Calls:
+      - m_Target: {fileID: 13247474}
+        m_TargetAssemblyTypeName: Match3Bonus.GameViewModel, Assembly-CSharp
+        m_MethodName: End
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1564550044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564550040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93374cca6a404846bf004d46f2453ac7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _onStart:
     m_PersistentCalls:
-      m_Calls: []
-  _delayFirstInvoke: 0
-  _isRepeating: 1
-  _repeatInterval: 0
+      m_Calls:
+      - m_Target: {fileID: 1564550043}
+        m_TargetAssemblyTypeName: Match3Bonus.AnimatorStateListener, Assembly-CSharp
+        m_MethodName: StartListenOnEnter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1770904689
 GameObject:
   m_ObjectHideFlags: 0
@@ -1354,7 +1477,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1770904690
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1409,7 +1532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.58344054}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1700,6 +1823,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2025150129}
+  - component: {fileID: 2025150132}
   - component: {fileID: 2025150128}
   - component: {fileID: 2025150127}
   - component: {fileID: 2025150126}
@@ -1835,6 +1959,19 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &2025150132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025150125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d6edd783d04444c9461d2299797d75c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tokenTemplate: {fileID: 0}
 --- !u!1 &819739415112496859
 GameObject:
   m_ObjectHideFlags: 0
@@ -2024,7 +2161,7 @@ MonoBehaviour:
   _onClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 13247473}
+      - m_Target: {fileID: 797925390}
         m_TargetAssemblyTypeName: Match3Bonus.GameView, Assembly-CSharp
         m_MethodName: SetSelectedToken
         m_Mode: 2
@@ -2046,30 +2183,6 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 9091497010007329641}
-        m_TargetAssemblyTypeName: Match3Bonus.AnimatorStateListener, Assembly-CSharp
-        m_MethodName: StartListenOnEnter
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Revealed
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 5424052245593353420}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Revealed
           m_BoolArgument: 0
         m_CallState: 2
   _animator: {fileID: 9091497010007329639}
@@ -2106,10 +2219,34 @@ MonoBehaviour:
   _onReveal:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 5424052245593353420}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Reveal
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 9091497010007329639}
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
         m_MethodName: SetTrigger
         m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Reveal
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 9091497010007329641}
+        m_TargetAssemblyTypeName: Match3Bonus.AnimatorStateListener, Assembly-CSharp
+        m_MethodName: StartListenOnEnter
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2185,10 +2322,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 9091497010007329639}
+  _stateToListen: Revealed
   _onStateEnter:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 13247473}
+      - m_Target: {fileID: 797925390}
         m_TargetAssemblyTypeName: Match3Bonus.GameView, Assembly-CSharp
         m_MethodName: UnlockTemporaryLockedTokens
         m_Mode: 1
