@@ -12,6 +12,7 @@ namespace Match3Bonus
         [SerializeField] private UnityEvent<PrizeElement> _onRevealNextPrize;
         [SerializeField] private UnityEvent<PrizeElement> _onRevealAuto;
         [SerializeField] private UnityEvent _onWin;
+        [SerializeField] private UnityEvent _onEnd;
 
         private Queue<PrizeElement> _prizes;
         private PrizeElement _lastMatchedPrize;
@@ -61,6 +62,11 @@ namespace Match3Bonus
             {
                 _onWin?.Invoke();
             }
+        }
+
+        public void End()
+        {
+            _onEnd?.Invoke();
         }
     }
 
