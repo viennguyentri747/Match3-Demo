@@ -135,8 +135,8 @@ GameObject:
   - component: {fileID: 13247471}
   - component: {fileID: 13247473}
   - component: {fileID: 13247474}
-  - component: {fileID: 13247476}
   - component: {fileID: 13247475}
+  - component: {fileID: 13247476}
   - component: {fileID: 13247477}
   m_Layer: 5
   m_Name: MenuControl
