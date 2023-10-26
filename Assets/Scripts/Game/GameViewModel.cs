@@ -10,6 +10,7 @@ namespace Match3Bonus
         [SerializeField] private UnityEvent _onEnable;
         [SerializeField] private UnityEvent<PrizeQueueData> _onDataReady;
         [SerializeField] private UnityEvent<PrizeElement> _onRevealNextPrize;
+        [SerializeField] private UnityEvent<PrizeElement> _onRevealAuto;
         [SerializeField] private UnityEvent _onWin;
 
         private Queue<PrizeElement> _prizes;
@@ -31,6 +32,15 @@ namespace Match3Bonus
             _prizes = data.PrizeQueue;
             _lastMatchedPrize = _prizes.LastOrDefault(element => element.IsMatched);
             _onDataReady?.Invoke(data);
+        }
+
+        public void RevealRemainPrizesAuto()
+        {
+            while (!_prizes.IsNullOrEmpty())
+            {
+                PrizeElement nextPrize = _prizes.Dequeue();
+                _onRevealAuto?.Invoke(nextPrize);
+            }
         }
 
         public void RevealNextPrize()

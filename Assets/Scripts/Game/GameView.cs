@@ -12,10 +12,10 @@ namespace Match3Bonus
         private readonly List<TokenButtonView> _cacheTokens = new();
         private readonly List<TokenButtonView> _tempLockTokens = new();
         private TokenButtonView _selectToken;
+        private readonly Dictionary<TokenButtonView, PrizeElement> _revealedTokens = new();
 
         public void ShowTokens(PrizeQueueData prizeQueueData)
         {
-            _tempLockTokens.Clear();
             _tokenTemplate.ShowCachedViews(prizeQueueData.PrizeQueue.Count, _cacheTokens,
                 (view, index) => { view.Setup(index); });
         }
@@ -34,7 +34,7 @@ namespace Match3Bonus
         {
             TokenButtonView token = IsValidToReveal(_selectToken)
                 ? _selectToken
-                : _cacheTokens.FirstOrDefault(IsValidToReveal);
+                : _cacheTokens.Where(IsValidToReveal).ToList().GetRandomElementOrDefault();
 
             if (token == null)
             {
@@ -43,6 +43,24 @@ namespace Match3Bonus
             }
 
             token.Reveal(prize);
+            _revealedTokens[token] = prize;
+        }
+
+        public void RevealAuto(PrizeElement prize)
+        {
+            TokenButtonView token = _cacheTokens.FirstOrDefault(view => view != null && !view.IsReveal);
+            if (token == null)
+            {
+                return;
+            }
+
+            token.Reveal(prize, true);
+            _revealedTokens[token] = prize;
+        }
+
+        public void LockUnRevealedTokensTemporary()
+        {
+            LockTokens(IsValidToReveal, view => _tempLockTokens.Add(view));
         }
 
         private bool IsValidToReveal(TokenButtonView token)
@@ -50,22 +68,11 @@ namespace Match3Bonus
             return token != null && !token.IsReveal && !token.IsLock;
         }
 
-        public void LockTokensTemporary()
-        {
-            LockTokens(view => _tempLockTokens.Add(view));
-        }
-
-        public void LockTokensForce()
-        {
-            _tempLockTokens.Clear();
-            LockTokens(null);
-        }
-
-        private void LockTokens(Action<TokenButtonView> onLock)
+        private void LockTokens(Func<TokenButtonView, bool> checkLock, Action<TokenButtonView> onLock)
         {
             foreach (TokenButtonView view in _cacheTokens)
             {
-                if (view.IsLock)
+                if (checkLock != null && !checkLock.Invoke(view))
                 {
                     continue;
                 }
@@ -82,7 +89,27 @@ namespace Match3Bonus
                 view.Unlock();
             }
 
+            ClearTempLockTokens();
+        }
+
+        private void ClearTempLockTokens()
+        {
             _tempLockTokens.Clear();
+        }
+
+        public void HighlightRevealedPrizesThatMatched()
+        {
+            foreach (KeyValuePair<TokenButtonView, PrizeElement> kvp in _revealedTokens)
+            {
+                PrizeElement prize = kvp.Value;
+                if (!prize.IsMatched)
+                {
+                    continue;
+                }
+
+                TokenButtonView token = kvp.Key;
+                token.HighLight();
+            }
         }
     }
 }

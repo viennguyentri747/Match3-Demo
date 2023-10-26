@@ -9,19 +9,16 @@ namespace Match3Bonus
         [SerializeField] private UnityEvent _onLock;
         [SerializeField] private UnityEvent _onUnlock;
         [SerializeField] private UnityEvent _onReveal;
+        [SerializeField] private UnityEvent _onRevealAuto;
+        [SerializeField] private UnityEvent _onHighlight;
+
         private bool _isLock;
         private bool _isReveal;
         public bool IsLock => _isLock;
         public bool IsReveal => _isReveal;
-        private PrizeElement _prizeElement;
 
         protected override void OnSetup(int index)
         {
-        }
-
-        public void ResetElement()
-        {
-            _prizeElement = null;
         }
 
         public void UnlockAndHide()
@@ -35,12 +32,19 @@ namespace Match3Bonus
             _isReveal = false;
         }
 
-        public void Reveal(PrizeElement prizeElement)
+        public void Reveal(PrizeElement prizeElement, bool isAuto = false)
         {
-            _prizeElement = prizeElement;
             _animator.runtimeAnimatorController = prizeElement.TokenAsset.AnimOverrideController;
             _isReveal = true;
-            _onReveal?.Invoke();
+
+            if (isAuto)
+            {
+                _onRevealAuto?.Invoke();
+            }
+            else
+            {
+                _onReveal?.Invoke();
+            }
         }
 
         public void Lock()
@@ -55,9 +59,9 @@ namespace Match3Bonus
             _onUnlock?.Invoke();
         }
 
-        public PrizeElement GetShowingElement()
+        public void HighLight()
         {
-            return _prizeElement;
+            _onHighlight?.Invoke();
         }
     }
 }
