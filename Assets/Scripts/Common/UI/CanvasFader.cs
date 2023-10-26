@@ -53,13 +53,11 @@ namespace Match3Bonus
                         _onFadeComplete?.Invoke();
                     }
                 },
-                (timeCountDown) =>
+                timeCountDown =>
                 {
-                    float progress = (_fadeDuration - timeCountDown)/ _fadeDuration;
+                    float progress = (_fadeDuration - timeCountDown) / _fadeDuration;
                     _canvasGroup.alpha = Mathf.Lerp(startAlpha, endAlpha, progress);
                 });
-
-
         }
     }
 }

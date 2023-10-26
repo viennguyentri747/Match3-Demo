@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -26,7 +25,7 @@ namespace Match3Bonus
         {
             _selectedPrize = selectedPrize;
             _onPrizeSelected?.Invoke(selectedPrize);
-            LogHelper.Log($"Select prize in Menu", selectedPrize.Name);
+            LogHelper.Log("Select prize in Menu", selectedPrize.Name);
         }
 
         public void SendShuffledPrizeData()
