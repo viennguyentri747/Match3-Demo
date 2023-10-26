@@ -29,10 +29,11 @@ namespace Match3Bonus
             Type listenDataType = typeof(T);
             if (_dictionary.TryGetValue(listenDataType, out List<IListener> listeners))
             {
+                LogHelper.LogEnumerable("Found listeners", listeners, listener => listener);
                 return listeners;
             }
 
-            LogHelper.Log("No listener for data of type: " + listenDataType);
+            LogHelper.Log("No listener for data of type", listenDataType);
             List<IListener> emptyListeners = new();
             return emptyListeners;
         }

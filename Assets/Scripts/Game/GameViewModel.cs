@@ -64,6 +64,14 @@ namespace Match3Bonus
             }
         }
 
+        public void CheckWin()
+        {
+            if (_prizes.IsNullOrEmpty())
+            {
+                _onWin?.Invoke();
+            }
+        }
+
         public void End()
         {
             _onEnd?.Invoke();

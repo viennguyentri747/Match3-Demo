@@ -16,6 +16,7 @@ namespace Match3Bonus
 
         public void Start()
         {
+            LogHelper.LogEnumerable("Prizes: ", _prizes, prize => prize.Name);
             _onDataReady?.Invoke(_prizes);
         }
 
@@ -23,6 +24,7 @@ namespace Match3Bonus
         {
             _selectedPrize = selectedPrize;
             _onPrizeSelected?.Invoke(selectedPrize);
+            LogHelper.Log($"Select prize in Menu", selectedPrize.Name);
         }
 
         public void SendShuffledPrizeData()
@@ -40,11 +42,11 @@ namespace Match3Bonus
             SelectPrizePack selectPrizePack = new(_selectedPrize, _prizes);
             Queue<PrizeElement> shuffledPrizes = _prizesShuffler.GenerateShuffledPrizes(selectPrizePack);
 
-            LogHelper.Log($@"Shuffled Queue: {string.Join(",", shuffledPrizes.Select(prize =>
+            LogHelper.LogEnumerable("Shuffled Queue", shuffledPrizes, element =>
             {
-                string logStr = prize.IsMatched ? $"<color=red>{prize.Name}</color>" : prize.Name;
+                string logStr = element.IsMatched ? element.Name.ToStringWith(Color.magenta) : element.Name;
                 return logStr;
-            }))}");
+            });
 
             return new PrizeQueueData(shuffledPrizes);
         }
