@@ -10,11 +10,16 @@ namespace Match3Bonus
         [SerializeField] private Vector2 _scaleMax;
         [SerializeField] private float _scaleDuration;
 
-        private CountDownRoutine _countDownRoutine = new();
+        private readonly CountDownRoutine _countDownRoutine = new();
         private Coroutine _coroutineShiftScale;
 
         public void StartShiftScale()
         {
+            if (_coroutineShiftScale != null)
+            {
+                StopCoroutine(_coroutineShiftScale);
+            }
+
             _coroutineShiftScale = StartCoroutine(RoutineShiftScale());
         }
 
