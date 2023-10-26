@@ -24,7 +24,6 @@ namespace Match3Bonus
 
         private IEnumerator RoutineInvokeInterval()
         {
-            _ = _delayFirstInvoke;
             yield return _countDownRoutine.RoutineCountdownInvoke(_delayFirstInvoke, Invoke, OnTimerUpdate);
 
             while (_isRepeating)
