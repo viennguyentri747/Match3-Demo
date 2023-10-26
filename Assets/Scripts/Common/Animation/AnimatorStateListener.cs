@@ -7,20 +7,20 @@ namespace Match3Bonus
     public class AnimatorStateListener : MonoBehaviour
     {
         [SerializeField] private Animator _animator;
+        [SerializeField] private string _stateToListen;
         [SerializeField] private UnityEvent<string> _onStateEnter;
-
         private Coroutine _coroutineListen;
 
-        public void StartListenOnEnter(string stateToListen)
+        public void StartListenOnEnter()
         {
             if (_coroutineListen != null)
             {
                 StopCoroutine(_coroutineListen);
             }
 
-            if (!IsSameState(stateToListen))
+            if (!IsSameState(_stateToListen))
             {
-                _coroutineListen = StartCoroutine(RoutineListen(stateToListen));
+                _coroutineListen = StartCoroutine(RoutineListen(_stateToListen));
             }
         }
 
