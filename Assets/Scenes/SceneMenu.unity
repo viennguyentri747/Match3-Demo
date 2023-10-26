@@ -259,6 +259,9 @@ MonoBehaviour:
   _fadeDuration: 0.6
   _onFadeComplete:
     m_PersistentCalls:
+      m_Calls: []
+  _onRevertFadeComplete:
+    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 13247476}
         m_TargetAssemblyTypeName: Match3Bonus.SceneLoader, Assembly-CSharp
@@ -272,9 +275,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  _onRevertFadeComplete:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &13247476
 MonoBehaviour:
   m_ObjectHideFlags: 0
