@@ -44,7 +44,7 @@ namespace Match3Bonus
 
         private void UpdateTimeView()
         {
-            _timerTxt.text = ((int)_currentTime).ToString();
+            _timerTxt.text = Mathf.FloorToInt(_currentTime).ToString();
         }
 
         private void Show()
