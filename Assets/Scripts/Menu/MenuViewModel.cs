@@ -18,7 +18,7 @@ namespace Match3Bonus
         public void Start()
         {
             _onStart?.Invoke();
-            LogHelper.LogEnumerable("Prizes: ", _prizes, prize => prize.Name);
+            LogHelper.LogEnumerable("Prizes", _prizes, prize => prize.Name);
             _onDataReady?.Invoke(_prizes);
         }
 

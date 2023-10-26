@@ -25,27 +25,20 @@ namespace Match3Bonus
         public static void LogError(object message)
         {
 #if UNITY_EDITOR
-            Debug.LogError(message.ToLogString(Color.red));
+            Debug.LogError(message.ToStringWith(Color.red).ApplyPrefix());
 #endif
         }
 
         public static void Log(string message, object data)
         {
 #if UNITY_EDITOR
-            Debug.Log($"{message.ToStringWith(Color.yellow)}: {data.ToLogString(Color.green)}");
+            Debug.Log($"{message.ToStringWith(Color.yellow)}: {data.ToStringWith(Color.green)}".ApplyPrefix());
 #endif
         }
 
-        public static void Log(object message)
+        private static string ApplyPrefix(this object message)
         {
-#if UNITY_EDITOR
-            Debug.Log(message.ToLogString(Color.green));
-#endif
-        }
-
-        private static string ToLogString(this object message, Color color)
-        {
-            return $"{LOG_PREFIX}{message.ToStringWith(color)}";
+            return $"{LOG_PREFIX}{message}";
         }
     }
 }
