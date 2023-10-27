@@ -7,28 +7,26 @@ namespace Match3Bonus
         [SerializeField] private float _widthHeightRatio;
         [SerializeField] private float _scaleVsMonitor;
 
-        private readonly CountDownRoutine _routineCountdown = new();
-        private Coroutine _coroutineResize;
-
         void OnEnable()
         {
             Resize(Screen.width, Screen.height);
         }
 
-        private void Resize(float desireWidth, float desireHeight, bool isResizeByWidth = true)
+        private void Resize(float currentWidth, float currentHeight)
         {
             float resultWidth;
             float resultHeight;
 
-            //Match width height with aspect ratio
-            if (isResizeByWidth)
+            //Resize down to match aspect ratio
+            bool isResizeDownByWidth = (currentWidth / currentHeight) < _widthHeightRatio;
+            if (isResizeDownByWidth)
             {
-                resultWidth = desireWidth;
+                resultWidth = currentWidth;
                 resultHeight = resultWidth / _widthHeightRatio;
             }
             else
             {
-                resultHeight = desireHeight;
+                resultHeight = currentHeight;
                 resultWidth = resultHeight * _widthHeightRatio;
             }
 
@@ -48,10 +46,7 @@ namespace Match3Bonus
 
         private void SetResolution(float width, float height)
         {
-            int newWidth = Mathf.RoundToInt(width);
-            int newHeight = Mathf.RoundToInt(height);
-
-            Screen.SetResolution(newWidth, newHeight, Screen.fullScreen);
+            Screen.SetResolution(width.ToInt(), height.ToInt(), Screen.fullScreen);
         }
     }
 }
