@@ -4,49 +4,46 @@ namespace Match3Bonus
 {
     public class WindowResizer : MonoBehaviour
     {
-        [SerializeField] private float _widthHeightAspect;
-        [SerializeField] private float _delayUpdateSize;
+        [SerializeField] private float _widthHeightRatio;
+        [SerializeField] private float _scaleVsMonitor;
 
         private readonly CountDownRoutine _routineCountdown = new();
         private Coroutine _coroutineResize;
-        private int _previousScreenWidth;
-        private int _previousScreenHeight;
-        private bool _isJustResize = true;
 
         void OnEnable()
         {
             Resize(Screen.width, Screen.height);
         }
 
-        private void Update()
-        {
-            bool isWidthChange = _previousScreenWidth != Screen.width;
-            if (isWidthChange || _previousScreenHeight != Screen.height)
-            {
-                if (_coroutineResize != null)
-                {
-                    StopCoroutine(_coroutineResize);
-                }
-
-                StartCoroutine(_routineCountdown.RoutineCountdownInvoke(_delayUpdateSize,
-                    () => { Resize(Screen.width, Screen.height, isWidthChange); }));
-            }
-        }
-
         private void Resize(float desireWidth, float desireHeight, bool isResizeByWidth = true)
         {
+            float resultWidth;
+            float resultHeight;
+
+            //Match width height with aspect ratio
             if (isResizeByWidth)
             {
-                int monitorWidth = Screen.currentResolution.width;
-                float targetWidth = Mathf.Min(monitorWidth, desireWidth);
-                SetResolution(targetWidth, targetWidth / _widthHeightAspect);
+                resultWidth = desireWidth;
+                resultHeight = resultWidth / _widthHeightRatio;
             }
             else
             {
-                int monitorHeight = Screen.currentResolution.height;
-                float targetHeight = Mathf.Min(monitorHeight, desireHeight);
-                SetResolution(targetHeight * _widthHeightAspect, targetHeight);
+                resultHeight = desireHeight;
+                resultWidth = resultHeight * _widthHeightRatio;
             }
+
+            //Resize vs monitor
+            float maxWidth = Screen.currentResolution.width * _scaleVsMonitor;
+            float maxHeight = Screen.currentResolution.height * _scaleVsMonitor;
+            bool isNeedResizeVsMonitor = resultWidth > maxWidth || resultHeight > maxHeight;
+            if (isNeedResizeVsMonitor)
+            {
+                float scaleDownRatio = 1 / Mathf.Max(resultWidth / maxWidth, resultHeight / maxHeight);
+                resultWidth *= scaleDownRatio;
+                resultHeight *= scaleDownRatio;
+            }
+
+            SetResolution(resultWidth, resultHeight);
         }
 
         private void SetResolution(float width, float height)
@@ -55,11 +52,6 @@ namespace Match3Bonus
             int newHeight = Mathf.RoundToInt(height);
 
             Screen.SetResolution(newWidth, newHeight, Screen.fullScreen);
-
-            _previousScreenWidth = newWidth;
-            _previousScreenHeight = newHeight;
-
-            _isJustResize = true;
         }
     }
 }

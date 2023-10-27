@@ -16,10 +16,10 @@ namespace Match3Bonus
         private void ApplySafeArea()
         {
             float bottomPixels = Screen.safeArea.y;
-            float topPixel = Screen.currentResolution.height - (Screen.safeArea.y + Screen.safeArea.height);
+            float topPixels = Screen.currentResolution.height - (Screen.safeArea.y + Screen.safeArea.height);
 
             float bottomRatio = bottomPixels / Screen.currentResolution.height;
-            float topRatio = topPixel / Screen.currentResolution.height;
+            float topRatio = topPixels / Screen.currentResolution.height;
 
             Vector2 refResolution = _canvasScaler.referenceResolution;
             float bottomSize = refResolution.y * bottomRatio;

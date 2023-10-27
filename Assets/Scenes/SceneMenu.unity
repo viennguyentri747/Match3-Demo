@@ -1642,5 +1642,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa14894bfc680214b908e69ad100145d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _widthHeightAspect: 0.5625
-  _delayUpdateSize: 0.15
+  _widthHeightRatio: 0.5625
+  _scaleVsMonitor: 0.9
