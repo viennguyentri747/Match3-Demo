@@ -23,7 +23,7 @@ _ Each scene will have a “Control” that stores the ViewModel (the data proce
 
 _ 99% of the event (that leads the logic flow) is stored in ViewModel so that the flow is as straightforward as possible:
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/51b1083d-caeb-4009-a9f8-8c275e6f35a9/c4ec8de0-f18b-477b-ba3d-13b47f23f0ea/Untitled.png)
+![image](https://github.com/viennguyentri747/Match3-Demo/assets/39218295/cd746f6f-0fb3-409d-8cab-d3a71b980350)
 
 _ There is not much to say about the View, it works on the views like showing views when a data change event happens in the model view …
 
@@ -42,7 +42,7 @@ _ Besides the features specified in the document I also added, most of them were
 
 - Test Window: access this by Window → TestGame, in code search for `TestGameEditorWindow`
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/51b1083d-caeb-4009-a9f8-8c275e6f35a9/257d9136-31d2-4b33-ad16-9d209f77a8b8/Untitled.png)
+![image](https://github.com/viennguyentri747/Match3-Demo/assets/39218295/c44d9db7-d6df-45dd-8255-64d1b61edc30)
 
 - Custom Log System: search for `LogHelper`
 - Custom Inspector for some components: search for `UnityEventInvokerEditor`
